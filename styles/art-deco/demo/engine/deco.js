@@ -70,6 +70,7 @@ export function toPath(pts, closed = false) {
 // Mitred parallel offset of a polyline (positive d = left of travel direction).
 export function offsetPoly(pts, d, closed = false) {
   const n = pts.length, out = [];
+  if (n < 2) return pts.map((q) => [q[0], q[1]]);
   const nrm = (a, b) => { const dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy) || 1; return [-dy / L, dx / L]; };
   for (let i = 0; i < n; i++) {
     const pv = i > 0 ? pts[i - 1] : (closed ? pts[n - 2] : null), nx = i < n - 1 ? pts[i + 1] : (closed ? pts[1] : null);
